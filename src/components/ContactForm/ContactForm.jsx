@@ -56,6 +56,7 @@ export const ContactForm = () => {
           id={inputNameId}
           onChange={handleInputChange}
           value={name}
+          autoComplete="off"
         />
       </InnerFormContainer>
       <InnerFormContainer>
@@ -69,6 +70,7 @@ export const ContactForm = () => {
           id={inputNumberId}
           onChange={handleInputChange}
           value={number}
+          autoComplete="off"
         />
       </InnerFormContainer>
       <Button type="submit">Add contact</Button>
