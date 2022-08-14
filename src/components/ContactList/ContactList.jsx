@@ -1,4 +1,3 @@
-import React from 'react';
 import { ContactListItem } from 'components';
 import { useDispatch } from 'react-redux/';
 import { deleteItem } from 'redux/contacts/contactsSlice';

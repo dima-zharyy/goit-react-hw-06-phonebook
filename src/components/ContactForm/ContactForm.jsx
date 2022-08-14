@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import {
   Form,
   InnerFormContainer,
@@ -7,16 +7,14 @@ import {
   Button,
 } from './ContactForm.styled';
 
-import { nanoid } from 'nanoid';
-
 import { useDispatch } from 'react-redux';
 import { addItem } from 'redux/contacts/contactsSlice';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const inputNameId = nanoid(5);
-  const inputNumberId = nanoid(5);
+  const inputNameId = useId();
+  const inputNumberId = useId();
   const dispatch = useDispatch();
 
   const handleSubmit = event => {

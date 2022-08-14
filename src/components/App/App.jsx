@@ -8,9 +8,11 @@ import {
   ContactsWrapper,
 } from './App.styled';
 
+import { getFilter, getItems } from 'redux/contacts/contactsSlice';
+
 export const App = () => {
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  const contacts = useSelector(getItems);
+  const filter = useSelector(getFilter);
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
