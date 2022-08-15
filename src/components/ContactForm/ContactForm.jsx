@@ -10,7 +10,7 @@ import {
 import { isContactInList } from 'helpers/isContactInList';
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from 'redux/contacts/contactsSlice';
+import { addItem, getItems } from 'redux/contacts/contactsSlice';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
@@ -18,7 +18,7 @@ export const ContactForm = () => {
   const inputNameId = useId();
   const inputNumberId = useId();
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
+  const contacts = useSelector(getItems);
 
   const handleSubmit = event => {
     event.preventDefault();
