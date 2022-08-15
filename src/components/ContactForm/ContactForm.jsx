@@ -7,7 +7,9 @@ import {
   Button,
 } from './ContactForm.styled';
 
-import { useDispatch } from 'react-redux';
+import { isContactInList } from 'helpers/isContactInList';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from 'redux/contacts/contactsSlice';
 
 export const ContactForm = () => {
@@ -16,11 +18,22 @@ export const ContactForm = () => {
   const inputNameId = useId();
   const inputNumberId = useId();
   const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    dispatch(addItem({ name, number }));
+    if (isContactInList(contacts, name)) {
+      alert(`${name} is already in contacts.`);
+      setName('');
+      setNumber('');
+      return;
+    }
+
+    const id = nanoid(5);
+    const newContact = { id, name, number };
+
+    dispatch(addItem(newContact));
 
     setName('');
     setNumber('');

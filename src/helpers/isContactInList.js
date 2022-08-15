@@ -1,5 +1,5 @@
-export const isContactInList = (contacts, data) => {
+export const isContactInList = (contacts, newName) => {
   return contacts.some(
-    ({ name }) => name.toLocaleLowerCase() === data.name.toLocaleLowerCase()
+    ({ name }) => name.toLocaleLowerCase() === newName.toLocaleLowerCase()
   );
 };

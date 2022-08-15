@@ -1,33 +1,21 @@
 import { ContactListItem } from 'components';
-import { useDispatch } from 'react-redux/';
-import { deleteItem } from 'redux/contacts/contactsSlice';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux/';
+import { getFilter, getItems } from 'redux/contacts/contactsSlice';
 
-export const ContactList = ({ contacts }) => {
-  const dispatch = useDispatch();
+export const ContactList = () => {
+  const contacts = useSelector(getItems);
+  const filter = useSelector(getFilter);
+  const filteredContacts = contacts.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
-  return (
+  return contacts.length > 0 ? (
     <ul>
-      {contacts.map(({ id, name, number }) => {
-        return (
-          <ContactListItem
-            key={id}
-            name={name}
-            number={number}
-            onClick={() => dispatch(deleteItem(id))}
-          />
-        );
+      {filteredContacts.map(({ id, name, number }) => {
+        return <ContactListItem key={id} name={name} number={number} id={id} />;
       })}
     </ul>
+  ) : (
+    <p>Your contact book is empty</p>
   );
-};
-
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.exact({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
 };
